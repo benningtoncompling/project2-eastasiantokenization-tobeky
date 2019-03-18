@@ -15,42 +15,28 @@ text.close()
 
 
 # attempt number one
-# def max_match(line, dictionary):
-#     if line in dictionary:
-#         #word = line
-#         #line = line[len(word):]
-#         #return word + " " + max_match(line, dictionary)
-#         for line in lines:
-#             sentence = line
-#             while len(sentence) > 1:
-#                 word = max_match(line, dictionary)
-#                 sentence = sentence[len(word):]
-#             return word + max_match(sentence, dictionary)
-#     if len(line) == 1:
-#         return line + " "
-#     else:
-#         new_line = line[:-1]
-#         return max_match(new_line, dictionary)
-
-
-# attempt number two
-# def max_match(lines, dictionary):
-#     for line in lines:
-#         if line in dictionary:
-#             sentence = line
-#             word = max_match(line, dictionary)
-#             sentence = sentence[len(word):]
-#             return word + max_match(sentence, dictionary)
-#         if len(line) == 1:
-#             return line + " "
-#         else:
-#             new_line = line[:-1]
-#             return max_match(new_line, dictionary)
+def max_match(line, dictionary):
+    if line in dictionary and line != "":
+        word = line
+        print(word)
+        if len(line) != len(word):
+            remainder = line[len(word):]
+        else:
+            remainder = ""
+        if remainder == "":
+            return
+        return word + " " + max_match(remainder, dictionary)
+    if len(line) == 1:
+        return str(line) + " "
+    elif len(line) > 1:
+        new_line = line[:-1]
+        return max_match(new_line, dictionary)
 
 
 result = open("out.txt", "w")
 for line in lines:
-    result.write(max_match(lines, dictionary))
+    output = max_match(line, dictionary)
+    result.write(str(output))
     result.write("\n")
 result.close()
 
