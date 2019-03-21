@@ -15,36 +15,20 @@ text.close()
 
 
 def max_match(line, dictionary):
-    if line in dictionary:
-        return line + " "
-    if len(line) == 1:
-        return line + " "
-    else:
-        new_line = line[:-1]
-        return max_match(new_line, dictionary)
+    case = line
+    spaced_line = " "
+    while case not in dictionary and len(case) > 1:
+        case = case[:-1]
 
+    if len(case) == 0:
+        return spaced_line
 
-# paulina helped me bang out this bit, but then we realized it was the same as what I had originally
-# sentence = []
-# def max_match(line, dictionary):
-#     if line in dictionary and line != "":
-#         word = line
-#         print(word)
-#         if len(line) != len(word):
-#             remainder = line[len(word):]
-#         else:
-#             remainder = ""
-#         if remainder == "":
-#             sentence.append(word)
-#             return
-#         sentence.append(word)
-#         return word + " " + max_match(remainder, dictionary)
-#     if len(line) == 1:
-#         sentence.append(line)
-#         return str(line) + " "
-#     elif len(line) > 1:
-#         new_line = line[:-1]
-#         return max_match(new_line, dictionary)
+    if case in dictionary or len(case) == 1:
+        spaced_line += case + " "
+        new_case = line[len(case):]
+        spaced_line += max_match(new_case, dictionary)
+        return spaced_line
+
 
 result = open("out.txt", "w")
 for line in lines:
